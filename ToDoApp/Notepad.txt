@@ -1,0 +1,52 @@
+  	itemDetailsTextArea.setText(item.getDetails());
+                    DateTimeFormatter df = DateTimeFormatter.ofPattern("MMMM d, yyyy"); // "d M yy");
+                    deadlineLabel.setText(df.format(item.getDeadline()));
+                    
+                    
+                    itemDetailsTextArea.setText(item.getDetails());
+        deadlineLabel.setText(item.getDeadline().toString());
+        
+        
+            	applicationItemView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ApplicationItem>() {
+			@Override
+			public void changed(ObservableValue<? extends ApplicationItem> observable, ApplicationItem oldValue,
+					ApplicationItem newValue) {
+				if(newValue != null) {
+                    ApplicationItem item = applicationItemView.getSelectionModel().getSelectedItem();
+                }
+			}
+        });
+        
+        
+                todoListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TodoItem>() {
+            @Override
+            public void changed(ObservableValue<? extends TodoItem> observable, TodoItem oldValue, TodoItem newValue) {
+                if(newValue != null) {
+                    TodoItem item = todoListView.getSelectionModel().getSelectedItem();
+                }
+            }
+        });
+        
+            @FXML
+    public void handleClickListView(){
+    	ApplicationItem applicationItem = applicationItemView.getSelectionModel().getSelectedItem();
+    	String fileName = applicationItem.getApplicationName();
+    	try {
+			TodoData.getInstance().loadTodoItems(fileName+".txt");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	todoListView.getItems().setAll(TodoData.getInstance().getTodoItems());
+    	todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+    	todoListView.getSelectionModel().selectFirst();
+    	
+    	
+    	public void removeLine(String lineContent) throws IOException
+{
+    File file = new File("myFile.txt");
+    List<String> out = Files.lines(file.toPath())
+                        .filter(line -> !line.contains(lineContent))
+                        .collect(Collectors.toList());
+    Files.write(file.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+}
+    }
