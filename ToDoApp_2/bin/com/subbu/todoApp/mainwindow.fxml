@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="borderPane" prefHeight="471.0" prefWidth="628.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.subbu.todoApp.Controller">
+    <top>
+    	<HBox prefHeight="33.0" prefWidth="628.0" style="-fx-background-color: white">
+	        <MenuBar prefHeight="33.0" prefWidth="810.0">
+            <Menu text="Menu">
+                <items>
+                    <MenuItem onAction="#addApplication" text="Add Application" />
+                    <SeparatorMenuItem />
+                    <MenuItem onAction="#deleteApplication" text="Delete Application" />
+                    <SeparatorMenuItem />
+                    <MenuItem onAction="#exitApplication" text="Exit" />
+                </items>
+            </Menu>
+       	    </MenuBar>
+        	<Button prefHeight="33.0" onAction="#todayTasks" prefWidth="100.0" text="Today Tasks" textFill="#0a19f0"/>
+	   </HBox>
+    </top>
+    <left>
+        <VBox prefHeight="445.0" prefWidth="257.0" style="-fx-background-color: white">
+	        <HBox>
+	        	<Label alignment="CENTER" text="      Applications List          " textFill="#e510da">
+	        	  <style>
+	        	  	-fx-background-color: white;
+	        	  	-fx-border-color: black;
+	        	  </style>
+	        	  <font>
+	          	        <Font name="Consolas Italic" size="14.0" />
+	          	  </font>
+	        	</Label>
+	        </HBox>
+	        <ListView fx:id="applicationItemView" prefHeight="427.0" prefWidth="249.0" VBox.vgrow="ALWAYS">
+        	</ListView>
+	    </VBox>
+    </left>
+    <center>
+        <VBox fx:id="centerVBOX" style="-fx-background-color: white">
+	         <HBox layoutX="3.0" prefHeight="20.0" prefWidth="371.0">
+	            <style>
+		        	  	-fx-background-color: white;
+		        	  	-fx-border-color: black;
+		        </style>
+	            <Label prefWidth="475.0" text=" Pending Tasks" textFill="#e510da">
+		        	  <font>
+		          	        <Font name="Consolas Italic" size="14.0" />
+		          	  </font>
+		        </Label>
+		        <Label prefWidth="75.0" text=" Priority" textFill="#e510da">
+		        	  <font>
+		          	        <Font name="Consolas Italic" size="14.0" />
+		          	  </font>
+		        </Label>
+		        <Label prefWidth="75.0" text=" Due Date" textFill="#e510da">
+		        	  <font>
+		          	        <Font name="Consolas Italic" size="14.0" />
+		          	  </font>
+		        </Label>
+	         </HBox>
+	            <ListView fx:id="todoListView" VBox.vgrow="ALWAYS">
+	            </ListView>
+	         <Label prefHeight="0.0" prefWidth="655.0" text="                              Completed Tasks" textFill="#10e337">
+	            <font>
+	               <Font name="Consolas Italic" size="14.0" />
+	            </font>
+	            <style>
+		        	  	-fx-background-color: white;
+		        	  	-fx-border-color: black;
+		        </style>
+	         </Label>
+	         <ListView fx:id="completedListView" prefHeight="253.0" VBox.vgrow="ALWAYS" />
+	         <ButtonBar prefHeight="40.0" prefWidth="200.0">
+	           <buttons>
+	               <Button layoutX="182.0" layoutY="17.0" mnemonicParsing="false" onAction="#addToDo" prefHeight="25.0" prefWidth="120.0" text="Add ToDo" textFill="#216824" />
+	               <Button layoutX="97.0" layoutY="17.0" mnemonicParsing="false" onAction="#editToDo" text="Edit ToDo" textFill="#3404e3" />
+	               <Button layoutX="30.0" layoutY="17.0" mnemonicParsing="false" onAction="#completeToDo" prefHeight="25.0" prefWidth="120.0" text="Complete ToDo" textFill="#2c052a" />
+	               <Button mnemonicParsing="false" onAction="#deleteToDo" prefHeight="25.0" text="Delete Completed ToDo" textFill="#ff0303" />
+	           </buttons>
+	         </ButtonBar>
+        </VBox>
+    </center>
+</BorderPane>
