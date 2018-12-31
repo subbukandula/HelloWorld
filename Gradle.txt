@@ -1,0 +1,22 @@
+https://stackoverflow.com/questions/29686698/calling-gradle-build-task-in-another-project
+
+if you have a multi-project build You need a root project that contains settings.gradle file with something like:
+
+include 'myproject1'
+include 'myproject2'
+Than you can just make a dependency from one project to another like this:
+
+myproject1/gradle.build
+
+task someOtherTask() << {
+   println 'Hello'
+}
+myproject2/gradle.build
+
+task sometask(dependsOn: ':myproject1:someOtherTask') << {
+  //do something here
+}
+Or if you want to call a task:
+
+project(':myproject1').tasks.build.execute()
+Notice: You have to apply java plugin to make build task available.
