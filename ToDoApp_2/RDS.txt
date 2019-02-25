@@ -1,3 +1,0 @@
-Subbu	1	25-Nov-2018	yes
-Venkat	1	21-Nov-2018	yes
-Kandula	1	26-Nov-2018	no

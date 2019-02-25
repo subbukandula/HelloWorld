@@ -1,4 +1,0 @@
-=AND($E3=$G$3,$C3<>"")
-=$E3="Completed"
-=OFFSET(Sheet1!$B:$B,0,0,COUNTA(Sheet1!$B:$B)-1,1)
-=NETWORKDAYS(TODAY(),F3)

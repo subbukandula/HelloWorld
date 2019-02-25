@@ -8,11 +8,13 @@ public class TodoItem {
     private String task;
     private String priority;
     private String Date;
+    private String completed;
     
-	public TodoItem(String task, String priority, String date) {
+	public TodoItem(String task, String priority, String date, String completed) {
         this.task = task;
         this.priority = priority;
         this.Date = date;
+        this.completed = completed;
     }
 
     public String getTask() {
@@ -37,6 +39,14 @@ public class TodoItem {
 
 	public void setDate(String date) {
 		Date = date;
+	}
+
+	public String getCompleted() {
+		return completed;
+	}
+
+	public void setCompleted(String completed) {
+		this.completed = completed;
 	}
 
 	@Override

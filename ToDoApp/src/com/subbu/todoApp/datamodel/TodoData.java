@@ -20,6 +20,9 @@ import java.util.List;
 public class TodoData{
     private static TodoData instance = new TodoData();
     private ObservableList<TodoItem> todoItems;
+    private ObservableList<TodoItem> completedItems;
+    private ObservableList<TodayItems> todayItems;
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
 
     public static TodoData getInstance() {
         return instance;
@@ -27,6 +30,24 @@ public class TodoData{
 
     public ObservableList<TodoItem> getTodoItems() {
         return todoItems;
+    }
+    
+    public ObservableList<TodoItem> getCompletedItems() {
+        return completedItems;
+    }
+    
+    public ObservableList<TodayItems> getTodayItems() {
+        return todayItems;
+    }
+    
+    public ObservableList<TodoItem> getClearTodoItems() {
+    	todoItems.clear();
+        return todoItems;
+    }
+    
+    public ObservableList<TodoItem> getClearCompletedItems() {
+    	completedItems.clear();
+        return completedItems;
     }
 
     public void loadTodoItems(String filename) throws IOException {
@@ -37,8 +58,63 @@ public class TodoData{
         try {
             while ((input = br.readLine()) != null) {
             	String[] tasks = input.split("\t");
-                TodoItem todoItem = new TodoItem(tasks[0],tasks[1],tasks[2]);
-                todoItems.add(todoItem);
+            	if("no".equals(tasks[3])) {
+            		TodoItem todoItem = new TodoItem(tasks[0],tasks[1],tasks[2],tasks[3]);
+            		todoItems.add(todoItem);
+            	}
+            }
+        } finally {
+            if(br != null) {
+                br.close();
+            }
+        }
+    }
+    
+    public void loadCompletedItems(String filename) throws IOException {
+    	completedItems = FXCollections.observableArrayList();
+        Path path = Paths.get(filename);
+        BufferedReader br = Files.newBufferedReader(path);
+        String input;
+        try {
+            while ((input = br.readLine()) != null) {
+            	String[] tasks = input.split("\t");
+            	if("yes".equals(tasks[3])) {
+            		TodoItem todoItem = new TodoItem(tasks[0],tasks[1],tasks[2],tasks[3]);
+            		completedItems.add(todoItem);
+            	}
+            }
+        } finally {
+            if(br != null) {
+                br.close();
+            }
+        }
+    }
+    
+    public void loadTodayItems(String applicationFile) throws IOException {
+    	todayItems = FXCollections.observableArrayList();
+        Path path = Paths.get(applicationFile);
+        BufferedReader br = Files.newBufferedReader(path);
+        String applicationName;
+        String input;
+        try {
+            while ((applicationName = br.readLine()) != null) {
+            	Path filePath = Paths.get(applicationName+".txt");
+            	BufferedReader br1 = null;
+            	try {
+            		br1 = Files.newBufferedReader(filePath);
+            		while ((input = br1.readLine()) != null) {
+            			String[] tasks = input.split("\t");
+            			String date = tasks[2];
+            			if("no".equals(tasks[3]) && !(LocalDate.parse(date, format).isAfter(LocalDate.now()))) {
+            				TodayItems todayItem = new TodayItems(tasks[0],applicationName,tasks[2],tasks[3],tasks[1]);
+            				todayItems.add(todayItem);
+            			}
+            		}
+            	} finally {
+            		if(br1 != null) {
+            			br1.close();
+            		}
+            	}
             }
         } finally {
             if(br != null) {

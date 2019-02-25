@@ -1,6 +1,0 @@
-OOD for PR1	1	22-Nov-2018	no
-HLD for PR2	1	30-Nov-2018	no
-OOD for PR3	2	22-Nov-2018	no
-OOD for PR0	1	21-Nov-2018	no
-HLD for PR0	2	21-Nov-2018	no
-OOD for PR4	2	30-Nov-2018	no
